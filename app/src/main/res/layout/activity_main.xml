@@ -65,6 +65,7 @@
                 android:layout_width="200dp"
                 android:textColor="@color/colorAccent"
                 android:backgroundTint="#333333"
+                android:outlineSpotShadowColor="@color/colorPrimaryDark"
                 android:layout_height="wrap_content"
                 android:text="Roll" />
 
