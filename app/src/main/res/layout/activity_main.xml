@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Roll my dices"
+            android:textColor="@color/colorAccent"
+            android:background="@color/colorPrimaryDark"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="select a number between 1-6"
+            android:textColor="#000"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:id="@+id/closeToTp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/etNumOfDice"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="2dp"
+                android:inputType="number"></EditText>
+
+            <Button
+                android:id="@+id/btAddDice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add dice" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/btRoll"
+                android:layout_width="200dp"
+                android:textColor="@color/colorAccent"
+                android:backgroundTint="#333333"
+                android:layout_height="wrap_content"
+                android:text="Roll" />
+
+            <Button
+                android:id="@+id/btHistory"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Roll History" />
+
+        </LinearLayout>
+
+
+        <com.google.android.flexbox.FlexboxLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/llDiceImgContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            app:flexWrap="wrap"></com.google.android.flexbox.FlexboxLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/logHandler">
+
+
+            <ExpandableListView
+                android:id="@+id/exList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
