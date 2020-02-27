@@ -3,6 +3,7 @@ package com.example.diceroller;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.flexbox.FlexboxLayout;
@@ -42,6 +44,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         closeToTop = findViewById(R.id.closeToTp);
         logHandler = findViewById(R.id.logHandler);
         numDice = findViewById(R.id.etNumOfDice);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+
+        outState.putIntegerArrayList("intarray", listGroup);
+        outState.putInt("turn", turn);
+        outState.putString("edittext", numDice.getText().toString());
+
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        numDice.setText(savedInstanceState.getString("edittext"));
+        turn = savedInstanceState.getInt("turn");
+        listGroup = savedInstanceState.getIntegerArrayList("intarray");
     }
 
     public void addDice() {
