@@ -12,7 +12,6 @@ import java.util.HashMap;
 public class ListView extends AppCompatActivity {
 
     android.widget.ListView listView;
-    ArrayList<Integer> arraylist;
     HashMap<String, ArrayList<Integer>> hashmap;
 
 
@@ -22,7 +21,6 @@ public class ListView extends AppCompatActivity {
         setContentView(R.layout.activity_list_view);
         listView = findViewById(R.id.lstView);
         MainActivity main = new MainActivity();
-        arraylist = main.getListGroup();
         hashmap = main.getListItem();
 
         Collection<ArrayList<Integer>> values = hashmap.values();
