@@ -27,23 +27,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int turn = 0;
     public ArrayList<Integer> listGroup = new ArrayList<>();
     HashMap<String, ArrayList<Integer>> listItem = new HashMap<>();
-    TextView closeToTop;
-    LinearLayout logHandler;
-    EditText numDice;
+    TextView txtfldTop;
+    LinearLayout logger;
+    EditText editTextNumberOfDices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button buttonRoll = findViewById(R.id.btRoll);
-        Button buttonAdd = findViewById(R.id.btAddDice);
-        Button buttonHis = findViewById(R.id.btHistory);
+        Button buttonRoll = findViewById(R.id.btnRoll);
+        Button buttonAdd = findViewById(R.id.btnAddDice);
+        Button buttonHis = findViewById(R.id.btnHistory);
         buttonAdd.setOnClickListener(this);
         buttonRoll.setOnClickListener(this);
         buttonHis.setOnClickListener(this);
-        closeToTop = findViewById(R.id.closeToTp);
-        logHandler = findViewById(R.id.logHandler);
-        numDice = findViewById(R.id.etNumOfDice);
+        txtfldTop = findViewById(R.id.txtViewTop);
+        logger = findViewById(R.id.logger);
+        editTextNumberOfDices = findViewById(R.id.editTextNumOfDice);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         outState.putIntegerArrayList("intarray", listGroup);
         outState.putInt("turn", turn);
-        outState.putString("edittext", numDice.getText().toString());
+        outState.putString("edittext", editTextNumberOfDices.getText().toString());
 
         super.onSaveInstanceState(outState, outPersistentState);
     }
@@ -60,19 +60,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        numDice.setText(savedInstanceState.getString("edittext"));
+        editTextNumberOfDices.setText(savedInstanceState.getString("edittext"));
         turn = savedInstanceState.getInt("turn");
         listGroup = savedInstanceState.getIntegerArrayList("intarray");
     }
 
     public void addDice() {
         try {
-            FlexboxLayout diceLayout = findViewById(R.id.llDiceImgContainer);
+            FlexboxLayout diceLayout = findViewById(R.id.imgDiceCont);
             diceLayout.removeAllViews();
 
             int dices = 0;
-            String numOfDice = numDice.getText().toString();
-            if (!"".equals(numDice)) {
+            String numOfDice = editTextNumberOfDices.getText().toString();
+            if (!"".equals(editTextNumberOfDices)) {
                 dices = Integer.parseInt(numOfDice);
             }
 
@@ -85,25 +85,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     img.setLayoutParams(new android.view.ViewGroup.LayoutParams(100, 100));
 
                     diceLayout.addView(img);
-                    closeToTop.setText("pick the number og dice you want");
+                    txtfldTop.setText("pick the number og dice you want");
                 }
             }
         } catch (NumberFormatException e) {
-            closeToTop.setTextColor(Color.RED);
-            closeToTop.setText(" It must be a number between 1 and 6 ");
+            txtfldTop.setTextColor(Color.RED);
+            txtfldTop.setText(" It must be a number between 1 and 6 ");
         }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btAddDice:
+            case R.id.btnAddDice:
                 addDice();
                 break;
-            case R.id.btRoll:
+            case R.id.btnRoll:
                 roll();
                 break;
-            case R.id.btHistory:
+            case R.id.btnHistory:
                 startNextActivity();
         }
     }
@@ -116,9 +116,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void roll(){
         turn++;
-        String round = "Turn " + turn ;
+        String round = "Roll nr " + turn ;
 
-        ViewGroup diceLayout = findViewById(R.id.llDiceImgContainer);
+        ViewGroup diceLayout = findViewById(R.id.imgDiceCont);
         for(int i = 0; i<diceLayout.getChildCount(); i++){
 
             View nexChild = diceLayout.getChildAt(i);
@@ -154,9 +154,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void ClearList(String round) {
         TextView textView = new TextView(this);
 
-        logHandler.addView(textView);
+        logger.addView(textView);
         if(turn > 6 ){
-            logHandler.removeAllViews();
+            logger.removeAllViews();
             turn = 0;
         }
 
