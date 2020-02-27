@@ -1,5 +1,6 @@
 package com.example.diceroller;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +23,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Random random = new Random();
     int turn = 0;
-    ArrayList<Integer> listGroup = new ArrayList<>();
+    public ArrayList<Integer> listGroup = new ArrayList<>();
     HashMap<String, ArrayList<Integer>> listItem = new HashMap<>();
     TextView closeToTop;
     LinearLayout logHandler;
@@ -34,8 +35,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Button buttonRoll = findViewById(R.id.btRoll);
         Button buttonAdd = findViewById(R.id.btAddDice);
+        Button buttonHis = findViewById(R.id.btHistory);
         buttonAdd.setOnClickListener(this);
         buttonRoll.setOnClickListener(this);
+        buttonHis.setOnClickListener(this);
         closeToTop = findViewById(R.id.closeToTp);
         logHandler = findViewById(R.id.logHandler);
         numDice = findViewById(R.id.etNumOfDice);
@@ -78,10 +81,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btRoll:
                 roll();
-
-
+                break;
+            case R.id.btHistory:
+                startNextActivity();
         }
     }
+
+    private void startNextActivity() {
+        Intent i = new Intent(this, ListView.class);
+        startActivity(i);
+    }
+
 
     private void roll(){
         turn++;
@@ -137,5 +147,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         listItem.clear();
         listGroup.clear();
+    }
+
+    public ArrayList<Integer> getListGroup(){
+        return listGroup;
+    }
+
+    public HashMap<String, ArrayList<Integer>> getListItem(){
+        return listItem;
     }
 }
